@@ -63,6 +63,15 @@ userRoute.post("/login", async (req, res) => {
           if (result) {
             const token = await loginFunction(user);
             req.session.token = token;
+            // req.session.save(function (err) {
+            //   if (err) {
+            //     console.error(err);
+            //     return res
+            //       .status(500)
+            //       .send({ error: "You are logged out. Please login again" });
+            //   }
+            //   console.log("saved");
+            // });
 
             res.status(200).send({
               message: "User Logged in successfully",

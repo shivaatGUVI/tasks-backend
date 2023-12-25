@@ -11,21 +11,29 @@ require("dotenv").config();
 const application = express();
 application.use(express.json());
 application.use(cors());
-application.use(cookieParser());
 application.use(
   session({
-    secret: "Your in the application",
+    secret: "Yourapplication",
     resave: false,
     saveUninitialized: false,
-    cookie: {},
+    cookie: {
+      sameSite: "strict",
+    },
   })
 );
+application.use(cookieParser());
 application.use("/user", userRoute);
 application.use("/task", taskRouter);
 application.use("/complete", completeRoute);
 
 application.get("/", (req, res) => {
   res.send("<h2>Home route</h2>");
+});
+
+application.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect("/login");
+  });
 });
 
 application.listen(process.env.PORT, async () => {
