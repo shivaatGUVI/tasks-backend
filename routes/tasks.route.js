@@ -117,7 +117,6 @@ taskRouter.post("/reminder/:_id", authorizeMiddleware, async (req, res) => {
     });
 
     res.status(200).json(info);
-    console.log(info)
     // .send({ message: "The reminder email has been sent to you" });
   } catch (err) {
     res.status(500).send({ error: err.message });

@@ -2,13 +2,12 @@ const jwt = require("jsonwebtoken");
 
 const authorizeMiddleware = (req, res, next) => {
   const payload = req.body;
-  const token = req.headers.authorization || req.session.token;
-  console.log(req.session.token);
+  const token = req.headers.authorization;
   try {
     jwt.verify(token, "tasksuserauthorization", function (err, decoded) {
       if (err) {
         res.status(500).send({
-          error: err.message + ", you are logged out. Please login again",
+          error: "You are logged out. Please login again",
         });
         return;
       }
