@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const application = express();
 application.use(express.json());
-application.use(cors());
+application.use(cors({ origin: "https://tasks-note-nine.vercel.app/" }));
 application.use(
   session({
     secret: "Yourapplication",
@@ -36,7 +36,7 @@ application.post("/logout", (req, res) => {
   });
 });
 
-application.listen(process.env.PORT, async () => {
+application.listen(undefined, async () => {
   console.log("Server Started");
   try {
     await connection;
